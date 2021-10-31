@@ -36,13 +36,11 @@ Plug 'preservim/nerdcommenter'
 Plug 'preservim/nerdtree'
 Plug 'ryanoasis/vim-devicons'
 "Plug 'mattn/emmet-vim'
-"Plug 'ayu-theme/ayu-vim'
 "Plug 'tomasr/molokai'
-Plug 'mhartington/oceanic-next'
-Plug 'dracula/vim', { 'as': 'dracula' }
-
-"Plug 'bluz71/vim-nightfly-guicolors'
 "Plug 'rakr/vim-one'
+"Plug 'dracula/vim', { 'as': 'dracula' }
+Plug 'morhetz/gruvbox'
+Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
 
 
 Plug 'vim-airline/vim-airline'
@@ -73,17 +71,22 @@ vmap <C-\> y:call system("xclip -i -selection clipboard", getreg("\""))<CR>:call
 nnoremap Y y$
 vnoremap <CR> :SnipRun<CR>
 
-"let ayucolor='dark'
-if exists('+termguicolors')
-  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-  set termguicolors
-endif
-let g:dracula_colorterm=0
-colorscheme dracula
+colorscheme tokyonight
+let g:tokyonight_style = "night"
+let g:tokyonight_italic_variables = 1
+let g:tokyonight_transparent = 1
 set bg=dark
+let g:airline_theme='tomorrow'
+"let g:gruvbox_contrast_dark = 'hard'
+"if exists('+termguicolors')
+  "let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+  "let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+  "set termguicolors
+"endif
+"let g:dracula_colorterm=0
+"let g:gruvbox_transparent_bg = 0.1
+"let g:gruvbox_italicize_comments = 1
 
-"let g:airline_theme='dark'
 
 let g:user_emmet_install_global = 0
 autocmd FileType html,css EmmetInstall
