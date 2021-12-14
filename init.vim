@@ -1,10 +1,12 @@
 set nu relativenumber
 let mapleader=" "
 set cmdheight=2
+set noswapfile
+set nowrap
 set smartindent
 set termguicolors
 set mouse=nvi
-set cursorline
+"set cursorline
 set nohlsearch
 set tabstop=4 softtabstop=4
 set shiftwidth=4
@@ -18,7 +20,7 @@ set nowritebackup
 set nohidden
 set ic
 noremap <C-N> :bn<CR>
-noremap <C-b> :bp<CR>
+noremap <C-p> :bp<CR>
 noremap <C-x> :bd<CR>
 set encoding=UTF-8
 set scroll=8
@@ -27,6 +29,7 @@ set updatetime=300
 set shortmess+=cr
 imap jk <ESC>
 syntax enable
+set termguicolors
 "set nocompatible
 filetype plugin indent on
 
@@ -38,7 +41,8 @@ Plug 'ryanoasis/vim-devicons'
 "Plug 'mattn/emmet-vim'
 "Plug 'tomasr/molokai'
 "Plug 'rakr/vim-one'
-"Plug 'dracula/vim', { 'as': 'dracula' }
+Plug 'ayu-theme/ayu-vim'
+Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'morhetz/gruvbox'
 Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
 
@@ -54,7 +58,8 @@ Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-vsnip'
 Plug 'hrsh7th/vim-vsnip'
-Plug 'windwp/nvim-autopairs'
+Plug 'lewis6991/impatient.nvim'
+"Plug 'windwp/nvim-autopairs'
 
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
@@ -71,21 +76,33 @@ vmap <C-\> y:call system("xclip -i -selection clipboard", getreg("\""))<CR>:call
 nnoremap Y y$
 vnoremap <CR> :SnipRun<CR>
 
-colorscheme tokyonight
-let g:tokyonight_style = "night"
-let g:tokyonight_italic_variables = 1
-let g:tokyonight_transparent = 1
-set bg=dark
-let g:airline_theme='tomorrow'
+"let ayucolor = 'dark'
+"let g:tokyonight_style = "night"
+"let g:tokyonight_italic_variables = 1
+"let g:tokyonight_transparent = 1
+"let g:airline_theme='tomorrow'
 "let g:gruvbox_contrast_dark = 'hard'
+let g:gruvbox_italicize_comments = 1
+let g:gruvbox_italic = 1
+let g:gruvbox_transparent_bg=1
+let g:gruvbox_italicize_strings = 1
+"let g:dracula_colorterm=0
+autocmd VimEnter * hi Normal ctermbg=NONE guibg=NONE
+colorscheme gruvbox
+set bg=dark
+"highlight Comment cterm=italic
 "if exists('+termguicolors')
   "let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
   "let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
   "set termguicolors
 "endif
-"let g:dracula_colorterm=0
-"let g:gruvbox_transparent_bg = 0.1
-"let g:gruvbox_italicize_comments = 1
+
+" IndentLine {{
+let g:indentLine_char = ''
+let g:indentLine_first_char = ''
+let g:indentLine_showFirstIndentLevel = 1
+let g:indentLine_setColors = 0
+" }}
 
 
 let g:user_emmet_install_global = 0
@@ -116,6 +133,7 @@ endif
 
 lua << EOF
 require('telescope').setup{}
+require('impatient')
 
 EOF
 " Use <Tab> and <S-Tab> to navigate through popup menu
@@ -134,3 +152,6 @@ nnoremap <leader>ff <cmd>Telescope find_files<cr>
 nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+
+"set t_ZH=^[[3m
+"set t_ZR=^[[23m
