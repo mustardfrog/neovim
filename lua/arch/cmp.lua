@@ -1,6 +1,11 @@
-lua << EOF
   -- Setup nvim-cmp.
   local cmp = require'cmp'
+  -- If you want insert `(` after select function or method item
+    local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+
+    -- add a lisp filetype (wrap my-function), FYI: Hardcoded = { "clojure", "clojurescript", "fennel", "janet" }
+    cmp_autopairs.lisp[#cmp_autopairs.lisp+1] = "racket"
+
 
   cmp.setup({
     snippet = {
@@ -21,7 +26,7 @@ lua << EOF
       { name = 'nvim_lsp' },
         { name = 'path' },
       { name = 'vsnip' },
-      { name = 'buffer', keyword_length = 3 },
+      { name = 'buffer', keyword_length = 2 },
     }
   })
 
@@ -29,6 +34,9 @@ lua << EOF
   require('lspconfig').clangd.setup {
     capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
   }
+  require('nvim-autopairs').setup{}
+  --cmp.event:on( 'confirm_done', cmp_autopairs.on_confirm_done({  map_char = { tex = '' } }))
+   -- require('rust-tools').setup({})
   cmp.setup {
   mapping = {
     ['<Tab>'] = function(fallback)
@@ -41,6 +49,3 @@ lua << EOF
   }
 }
 
-
-
-EOF

@@ -1,4 +1,3 @@
-lua << EOF
 require'sniprun'.setup({
   selected_interpreters = {},     --# use those instead of the default for the current filetype
   repl_enable = {},               --# enable REPL-like behavior for the given interpreters
@@ -41,4 +40,3 @@ require'sniprun'.setup({
   borders = 'double'               --# display borders around floating windows
                                    --# possible values are 'none', 'single', 'double', or 'shadow'
 })
-EOF
