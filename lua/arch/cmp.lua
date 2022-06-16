@@ -6,7 +6,6 @@
     -- add a lisp filetype (wrap my-function), FYI: Hardcoded = { "clojure", "clojurescript", "fennel", "janet" }
     cmp_autopairs.lisp[#cmp_autopairs.lisp+1] = "racket"
 
-
   cmp.setup({
     snippet = {
       expand = function(args)
@@ -30,13 +29,23 @@
     }
   })
 
-  -- Setup lspconfig.
-  require('lspconfig').clangd.setup {
-    capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
-  }
-  require('nvim-autopairs').setup{}
+    local capabilities = vim.lsp.protocol.make_client_capabilities()
+    capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+    local servers  = {"rust_analyzer", "hls", "clangd", "tsserver"}
+
+    for _, server in ipairs(servers) do 
+        require('lspconfig')[server].setup { capabilities = capabilities, on_attach = on_attach}
+    end
+  
+  require('lspconfig').hls.setup{
+    capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
+    settings = {
+        haskell = {  formattingProvider = "brittany" ,"--indent=4" }
+    }
+}
+  --require('nvim-autopairs').setup{}
   --cmp.event:on( 'confirm_done', cmp_autopairs.on_confirm_done({  map_char = { tex = '' } }))
-   -- require('rust-tools').setup({})
+    --require('rust-tools').setup({})
   cmp.setup {
   mapping = {
     ['<Tab>'] = function(fallback)
@@ -48,4 +57,3 @@
     end
   }
 }
-

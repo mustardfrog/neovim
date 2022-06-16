@@ -1,4 +1,3 @@
-
 local keymap = vim.api.nvim_set_keymap
 local opts = { noremap = true }
 
@@ -12,13 +11,16 @@ defaults = {
       }
     }
   },
+  file_ignore_patterns = { 
+      "./node_modules" 
+  },
   pickers = {
-      find_files = {
-          theme = "ivy",
-      },
-      live_grep = {
-          theme = "ivy",
-      },
+      --find_files = {
+          --theme = "ivy",
+      --},
+      --live_grep = {
+          --theme = "ivy",
+      --},
     -- Default configuration for builtin pickers goes here:
   },
   extensions = {

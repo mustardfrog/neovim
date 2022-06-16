@@ -3,16 +3,14 @@ local opts = { noremap = true }
 local keymap = vim.api.nvim_set_keymap
 
 vim.cmd [[
-    vmap <C-\> y:call system("xclip -i -selection clipboard", getreg("\""))<CR>:call system("xclip -i", getreg("\""))<CR>
+    let g:user_emmet_leader_key = "<C-f>"
+    "vmap <C-\> y:call system("xclip -i -selection clipboard", getreg("\""))<CR>:call system("xclip -i", getreg("\""))<CR>
+    "nnoremap <C-s> :call system("wl-copy", @")<CR>
+    vmap <C-\> y:call system("wl-copy", @")<CR>:call system("wl-copy", @")<CR>
     nnoremap Y y$
     "vnoremap <CR> :SnipRun<CR>
-    nnoremap <C-t> :NERDTreeToggle<CR>
-    
-    " Exit Vim if NERDTree is the only window remaining in the only tab.
-    autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
-
-    " Close the tab if NERDTree is the only window remaining in it.
-    autocmd BufEnter * if winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
+    "nnoremap <C-t> :NERDTreeToggle<CR>
+    nnoremap <C-t> :Lexplore<CR>
 
     " Use <Tab> and <S-Tab> to navigate through popup menu
     inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"

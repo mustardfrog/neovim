@@ -70,7 +70,6 @@ require('rust-tools').setup(opts)
 --require("dap").setup()
 
 
-
 local dap_install = require("dap-install")
 
 dap_install.setup({
